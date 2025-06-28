@@ -1,5 +1,5 @@
 from abc import abstractmethod, ABC
-from error import LargoExcedidoError
+from error import LargoExcedidoError, SubTipoInvalidoError
 
 class Anuncio(ABC):
     def __init__(self, ancho, alto, url_archivo, url_clic, sub_tipo):
@@ -42,7 +42,23 @@ class Anuncio(ABC):
         return self.__sub_tipo
     @sub_tipo.setter
     def sub_tipo(self, sub_tipo):
-        self.__sub_tipo = sub_tipo
+        if isinstance(self,Video) and sub_tipo in Video.SUB_TIPO:
+            print("Video")
+        elif isinstance(self,Social) and sub_tipo in Social.SUB_TIPO:
+            print("Social")
+        elif isinstance(self,Display) and sub_tipo in Display.SUB_TIPO:
+            print("Display")
+        else:
+            raise SubTipoInvalidoError
+
+        #si la instancia actual == instancia de video -> 
+        #si la instancia actual == instancia de social ->
+        if isinstance(self,Video) and sub_tipo in Video.SUB_TIPO
+            or isinstance(self,Social) and sub_tipo in Social.SUB_TIPO
+            or isinstance(self,Display) and sub_tipo in Display.SUB_TIPO:
+            print("algo")
+        else:
+            raise SubTipoInvalidoError
 
     @staticmethod
     def mostrar_formatos():
@@ -78,7 +94,27 @@ class Campaing: #Si se tiene que instanciar con un componente de la clase Anunci
         
         return new_anuncio
         #self.__anuncios.append()
-        
+    
+    def agregar_anuncio(self):
+        #Opcion que el usuario entra a bucle en agregar anuncios.?
+        while True:
+            try:
+                opcion = int(input("Que tipo de anuncio quieres agregar? (1- Video | 2- Display | 3- Social | 4- Para Salir)"))
+                        
+                if opcion == 1:
+                    duracion = int(input("Ingrese la duración del video (en segundos): "))
+                    new_anuncio = Video(duracion)
+                elif opcion == 2:
+                    new_anuncio = Display()
+                elif opcion == 3:
+                    new_anuncio == Social ()          
+                else:
+                    break
+                
+                self.__anuncios.append(new_anuncio)
+
+            except Exception as e:
+                pass
 
 
 #nombre
@@ -111,9 +147,7 @@ class Campaing: #Si se tiene que instanciar con un componente de la clase Anunci
         return self.__anuncios
 
     def __str__(self):
-        return f"""Nombre de la campaña: 
-Campaña 1 Anuncios: 1 Video, 2 Display, 0 Social
-"""
+        return f"nombre de campaña: {self.nombre} No se que más"
 
 class Video(Anuncio):
     FORMATO = "Video"
@@ -123,6 +157,7 @@ class Video(Anuncio):
         self.ancho = 1
         self.alto = 1
         self.__duracion = duracion if duracion > 0 else 5
+        super.sub_tipo
 
     @property
     def duracion(self):
@@ -137,7 +172,8 @@ class Video(Anuncio):
     def redimensionar_anuncio():
         print("RECORTE DE VIDEO NO IMPLEMENTADO AÚN")
 
-
+    def __repr__(self):
+        return f"{Video.FORMATO}"
 
 class Display(Anuncio):
     FORMATO = "Display"
@@ -149,6 +185,8 @@ class Display(Anuncio):
     def redimensionar_anuncio():
         print("REDIMENSIONAMIENTO DE ANUNCIOS DISPLAY NO IMPLEMENTADO AÚN")
 
+    def __repr__(self):
+        return f"{Display.FORMATO}"
 
 class Social(Anuncio):
     FORMATO = "Social"
@@ -159,3 +197,6 @@ class Social(Anuncio):
 
     def redimensionar_anuncio():
         print("REDIMENSIONAMIENTO DE ANUNCIOS DE REDES SOCIALES NO IMPLEMENTADO AÚN")
+
+    def __repr__(self):
+        return f"{Social.FORMATO}"
