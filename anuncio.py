@@ -66,29 +66,28 @@ class Anuncio(ABC):
 #Clase Video
 class Video(Anuncio):
     FORMATO = "Video"
-    SUB_TIPO = ("Instream","Outstream")
+    SUB_TIPO = ("Instream", "Outstream")
 
-    def __init__(self, duracion, SUB_TIPO):
-        self.ancho = 1
-        self.alto = 1
+    def __init__(self, duracion, sub_tipo):
+        super().__init__(ancho=1, alto=1, url_archivo="default.mp4", url_clic="https://clic.com", sub_tipo=sub_tipo)
         self.__duracion = duracion if duracion > 0 else 5
-        self.SUB_TIPO = SUB_TIPO
 
     @property
     def duracion(self):
         return self.__duracion
+
     @duracion.setter
     def duracion(self, duracion):
         self.__duracion = duracion
 
-    def comprimir_anuncio():
+    def comprimir_anuncio(self):
         print("COMPRESIÓN DE VIDEO NO IMPLEMENTADA AÚN")
 
-    def redimensionar_anuncio():
+    def redimensionar_anuncio(self):
         print("RECORTE DE VIDEO NO IMPLEMENTADO AÚN")
 
     def __repr__(self):
-        return f"{Video.FORMATO}"
+        return f"Video(duración: {self.duracion}, tipo: {self.sub_tipo})"
 
 #Clase Display
 class Display(Anuncio):
@@ -98,14 +97,14 @@ class Display(Anuncio):
     def __init__(self, ancho, alto, url_archivo, url_click, sub_tipo):
         super().__init__(ancho, alto, url_archivo, url_click, sub_tipo)
 
-    def comprimir_anuncio():
+    def comprimir_anuncio(self):
         print("COMPRESIÓN DE ANUNCIOS DISPLAY NO IMPLEMENTADA AÚN")
 
-    def redimensionar_anuncio():
+    def redimensionar_anuncio(self):
         print("REDIMENSIONAMIENTO DE ANUNCIOS DISPLAY NO IMPLEMENTADO AÚN")
 
     def __repr__(self):
-        return f"{Display.FORMATO}"
+        return f"Display({self.ancho}x{self.alto}, sub_tipo: {self.sub_tipo})"
 
 #Clase Social
 class Social(Anuncio):
@@ -115,11 +114,11 @@ class Social(Anuncio):
     def __init__(self, ancho, alto, url_archivo, url_click, sub_tipo):
         super().__init__(ancho, alto, url_archivo, url_click, sub_tipo)
 
-    def comprimir_anuncio():
+    def comprimir_anuncio(self):
         print("COMPRESIÓN DE ANUNCIOS DE REDES SOCIALES NO IMPLEMENTADA AÚN")
 
-    def redimensionar_anuncio():
+    def redimensionar_anuncio(self):
         print("REDIMENSIONAMIENTO DE ANUNCIOS DE REDES SOCIALES NO IMPLEMENTADO AÚN")
 
     def __repr__(self):
-        return f"{Social.FORMATO}"
+        return f"Social({self.ancho}x{self.alto}, sub_tipo={self.sub_tipo})"

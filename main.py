@@ -1,26 +1,9 @@
-from campaing import *
+from campaign import *
 from datetime import date
 
 
 
 
+c = Campaign("Campaña 1", "12/06/2025", "22/07/2025")
 
-
-
-
-
-a = Social(2,3,"sadsa","2342","subtipo")
-
-
-
-v = Video(12,"asd")
-
-
-d = Display(1,2,"asdsa", "asdsad","subtipo")
-
-
-print(a ,  v,  d)
-
-
-
-a.sub_tipo = "Facebook"
+print(c)
