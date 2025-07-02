@@ -1,14 +1,26 @@
-from campaing import Campaing, Anuncio
+from campaing import *
+from datetime import date
 
 
 
 
 
 
-c = Campaing("campaña1","1", "2")
-c.agregar_anuncio()
-print(c.anuncios)
-
-a = Anuncio(2,3,"qwe","asd","zxc")
 
 
+
+a = Social(2,3,"sadsa","2342","subtipo")
+
+
+
+v = Video(12,"asd")
+
+
+d = Display(1,2,"asdsa", "asdsad","subtipo")
+
+
+print(a ,  v,  d)
+
+
+
+a.sub_tipo = "Facebook"
